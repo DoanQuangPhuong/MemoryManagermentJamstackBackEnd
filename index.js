@@ -9,6 +9,7 @@ app.use(express.json());
 app.post('/allocate', (req, res) => {
   
   const { blockSizes, processSizes, allocationType } = req.body;
+  //lưu vị trí thứ i vùng nhớ được cấp phát, nếu chưa được cấp phát giá trị = -1
   let allocations = new Array(processSizes.length).fill(-1);
   // Mảng 2D lưu trữ trạng thái phân mảnh sau mỗi lần cấp phát
   let fragmentations = [];
@@ -73,7 +74,7 @@ app.post('/allocate', (req, res) => {
   }
 
   // server sẽ gửi về một phản hồi HTTP dưới dạng JSON cho client, trong đó có hai trường dữ liệu là allocations và fragmentations.
-  res.json({ allocations, fragmentations });
+  res.json({ allocations, fragmentations,remainingBlocks });
 });
 
 app.listen(port, () => {
