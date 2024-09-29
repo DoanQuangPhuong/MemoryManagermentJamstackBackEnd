@@ -17,7 +17,7 @@ app.post('/allocate', (req, res) => {
     processSizes.forEach((process, i) => {
       for (let j = 0; j < remainingBlocks.length; j++) {
         if (remainingBlocks[j] >= process) {
-          allocations[i] = j + 1;
+          allocations[i] = j;
           remainingBlocks[j] -= process;
           break;
         }
@@ -38,7 +38,7 @@ app.post('/allocate', (req, res) => {
         }
       }
       if (bestIndex !== -1) {
-        allocations[i] = bestIndex + 1;
+        allocations[i] = bestIndex;
         remainingBlocks[bestIndex] -= process;
       }
       fragmentations.push([...remainingBlocks]); 
@@ -57,7 +57,7 @@ app.post('/allocate', (req, res) => {
         }
       }
       if (worstIndex !== -1) {
-        allocations[i] = worstIndex + 1;
+        allocations[i] = worstIndex;
         remainingBlocks[worstIndex] -= process;
       }
       fragmentations.push([...remainingBlocks]); 
@@ -68,7 +68,7 @@ app.post('/allocate', (req, res) => {
       let allocated = false;
       for (let j = lastAllocatedIndex; j < remainingBlocks.length; j++) {
         if (remainingBlocks[j] >= process) {
-          allocations[i] = j + 1;
+          allocations[i] = j;
           remainingBlocks[j] -= process;
           lastAllocatedIndex = j;
           allocated = true;
@@ -78,7 +78,7 @@ app.post('/allocate', (req, res) => {
       if (!allocated) {
         for (let j = 0; j < lastAllocatedIndex; j++) {
           if (remainingBlocks[j] >= process) {
-            allocations[i] = j + 1;
+            allocations[i] = j;
             remainingBlocks[j] -= process;
             lastAllocatedIndex = j;
             break;
@@ -91,7 +91,7 @@ app.post('/allocate', (req, res) => {
     processSizes.forEach((process, i) => {
       for (let j = remainingBlocks.length - 1; j >= 0; j--) {
         if (remainingBlocks[j] >= process) {
-          allocations[i] = j + 1;
+          allocations[i] = j;
           remainingBlocks[j] -= process;
           break;
         }
