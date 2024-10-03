@@ -70,11 +70,12 @@ app.post('/allocate', (req, res) => {
         if (remainingBlocks[j] >= process) {
           allocations[i] = j;
           remainingBlocks[j] -= process;
-          lastAllocatedIndex = j;
+          lastAllocatedIndex = j;//lưu lại vị trí vừa được cấp phát để tiến trình sau tiếp tục được cấp phát từ vị trí này
           allocated = true;
           break;
         }
       }
+      // Nếu không tìm thấy từ vị trí cuối cùng, tìm tiếp từ đầu mảng
       if (!allocated) {
         for (let j = 0; j < lastAllocatedIndex; j++) {
           if (remainingBlocks[j] >= process) {
