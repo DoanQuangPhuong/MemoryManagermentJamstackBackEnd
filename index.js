@@ -13,6 +13,9 @@ const port = process.env.PORT || 5000;
 //app.use(cors());
 app.use(express.json());
 
+app.options('*', cors(corsOptions)); // Cho phép yêu cầu OPTIONS
+
+
 app.post('/allocate', (req, res) => {
   const { blockSizes, processSizes, allocationType } = req.body;
   
