@@ -2,7 +2,8 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = 5000;
+// const port =  5000;
+const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
@@ -104,7 +105,11 @@ app.post('/allocate', (req, res) => {
   res.json({ allocations, fragmentations, remainingBlocks });
 });
 
-
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(`Server is running at port ${port}`);
 });
+
+
+// app.listen(port, () => {
+//   console.log(`Server is running at http://localhost:${port}`);
+// });
