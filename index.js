@@ -1,20 +1,10 @@
 // server.js (Node.js Backend)
 const express = require('express');
 const cors = require('cors');
-const corsOptions = {
-  origin: 'https://memory-managerment-jamstack-front-end.vercel.app', // Chỉ định nguồn front-end được phép
-  optionsSuccessStatus: 200 // Một số trình duyệt có thể không hỗ trợ các mã trạng thái khác ngoài 200
-};
-app.use(cors(corsOptions));
-
 const app = express();
-// const port =  5000;
-const port = process.env.PORT || 5000;
-//app.use(cors());
+const port = 5000;
+app.use(cors());
 app.use(express.json());
-
-app.options('*', cors(corsOptions)); // Cho phép yêu cầu OPTIONS
-
 
 app.post('/allocate', (req, res) => {
   const { blockSizes, processSizes, allocationType } = req.body;
@@ -114,11 +104,7 @@ app.post('/allocate', (req, res) => {
   res.json({ allocations, fragmentations, remainingBlocks });
 });
 
+
 app.listen(port, () => {
-  console.log(`Server is running at port ${port}`);
+  console.log(`Server is running at http://localhost:${port}`);
 });
-
-
-// app.listen(port, () => {
-//   console.log(`Server is running at http://localhost:${port}`);
-// });
