@@ -1,10 +1,16 @@
 // server.js (Node.js Backend)
 const express = require('express');
 const cors = require('cors');
+const corsOptions = {
+  origin: 'https://memory-managerment-jamstack-front-end.vercel.app', // Chỉ định nguồn front-end được phép
+  optionsSuccessStatus: 200 // Một số trình duyệt có thể không hỗ trợ các mã trạng thái khác ngoài 200
+};
+app.use(cors(corsOptions));
+
 const app = express();
 // const port =  5000;
 const port = process.env.PORT || 5000;
-app.use(cors());
+//app.use(cors());
 app.use(express.json());
 
 app.post('/allocate', (req, res) => {
