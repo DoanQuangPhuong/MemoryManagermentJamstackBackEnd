@@ -111,5 +111,5 @@ app.post('/allocate', (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(`Server is running at https://memory-managerment-jamstack-back-end.vercel.app:${port}`);
 });
