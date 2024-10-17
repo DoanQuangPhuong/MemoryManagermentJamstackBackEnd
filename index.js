@@ -1,20 +1,27 @@
-// server.js (Node.js Backend)
 const express = require('express');
 const cors = require('cors');
-const { corsOptions } = require('./configs/cors')
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors({
-  origin: 'https://memory-managerment-jamstack-front-end.vercel.app'
-}));
+// Cấu hình CORS
+const corsOptions = {
+  origin: 'https://memory-managerment-jamstack-front-end.vercel.app', // Cho phép miền front-end của bạn
+  methods: ['GET', 'POST', 'OPTIONS'], // Cho phép các phương thức này
+  allowedHeaders: ['Content-Type'], // Cho phép các header này
+};
 
-app.options('/allocate', cors());
+// Sử dụng CORS với các tùy chọn đã định nghĩa
+app.use(cors(corsOptions));
+
+// Xác minh các yêu cầu OPTIONS
+app.options('/allocate', cors(corsOptions));
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('Memory Allocation Backend is running!');
 });
+
 
 app.post('/allocate', (req, res) => {
   const { blockSizes, processSizes, allocationType } = req.body;
