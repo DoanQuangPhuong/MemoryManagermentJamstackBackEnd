@@ -6,12 +6,10 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: 'https://memory-managerment-jamstack-front-end.vercel.app', // Thay thế bằng URL frontend của bạn
-  methods: ['GET', 'POST'], // Chỉ cho phép các phương thức cụ thể
-  credentials: true, // Cho phép thông tin xác thực (nếu cần)
+  origin: 'https://memory-managerment-jamstack-front-end.vercel.app'
 }));
 
-
+app.options('/allocate', cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
