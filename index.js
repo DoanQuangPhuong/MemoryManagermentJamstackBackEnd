@@ -4,8 +4,16 @@ const cors = require('cors');
 const app = express();
 const port = 5000;
 app.use(cors({
-  origin: ["https://memory-managerment-jamstack-front-end.vercel.app"]
+  origin: [
+    "https://memory-managerment-jamstack-front-end.vercel.app", 
+    "https://memory-managerment-jamstack-back-end.vercel.app"
+  ]
 }));
+app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", cors.origin);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(express.json());
 
 app.get('/', (req, res) => {
