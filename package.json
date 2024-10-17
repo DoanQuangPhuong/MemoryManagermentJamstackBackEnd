@@ -14,5 +14,6 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "nodemon": "^3.1.5"
-  }
+  },
+   "proxy": "https://memory-managerment-jamstack-back-end.vercel.app"
 }

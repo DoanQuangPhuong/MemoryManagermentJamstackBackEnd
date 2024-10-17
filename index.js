@@ -5,14 +5,11 @@ const { corsOptions } = require('./configs/cors')
 const app = express();
 const port = process.env.PORT || 5000;
 
-const corsOptions = {
-  origin: 'https://memory-managerment-jamstack-front-end.vercel.app', // Địa chỉ frontend
-  methods: ['GET', 'POST', 'OPTIONS'], // Các phương thức cho phép
-  allowedHeaders: ['Content-Type'], // Các header cho phép
-};
-
-app.use(cors(corsOptions)); // Sử dụng middleware CORS
-app.options('*', cors(corsOptions)); // Thêm middleware cho OPTIONS requests
+app.use(cors({
+  origin: 'https://memory-managerment-jamstack-front-end.vercel.app', // Thay thế bằng URL frontend của bạn
+  methods: ['GET', 'POST'], // Chỉ cho phép các phương thức cụ thể
+  credentials: true, // Cho phép thông tin xác thực (nếu cần)
+}));
 
 
 app.use(express.json());
