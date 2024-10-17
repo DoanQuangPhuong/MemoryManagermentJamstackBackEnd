@@ -5,7 +5,7 @@ const { corsOptions } = require('./configs/cors')
 const app = express();
 const port = 5000;
 app.use(cors(corsOptions));
-
+app.options('*', cors(corsOptions)); 
 app.use(express.json());
 
 app.get('/', (req, res) => {
