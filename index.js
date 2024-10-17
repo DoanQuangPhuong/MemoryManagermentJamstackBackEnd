@@ -5,7 +5,7 @@ const port = process.env.PORT || 5000;
 
 // Cấu hình CORS
 const corsOptions = {
-  origin: 'https://memory-managerment-jamstack-front-end.vercel.app', // Cho phép miền front-end của bạn
+  origin: 'https://memory-managerment-jamstack-back-end.vercel.app', // Cho phép miền front-end của bạn
   methods: ['GET', 'POST', 'OPTIONS'], // Cho phép các phương thức này
   allowedHeaders: ['Content-Type'], // Cho phép các header này
 };
