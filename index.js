@@ -2,21 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const port = 5000;
-
-// Cấu hình CORS
-const corsOptions = {
-  origin: 'https://memory-managerment-jamstack-back-end.vercel.app', // Cho phép miền front-end của bạn
-  methods: ['GET', 'POST', 'OPTIONS'], // Cho phép các phương thức này
-  allowedHeaders: ['Content-Type'], // Cho phép các header này
-};
-
-// Sử dụng CORS với các tùy chọn đã định nghĩa
 app.use(cors());
-
-// Xác minh các yêu cầu OPTIONS
-//app.options('/allocate', cors(corsOptions));
-
 app.use(express.json());
+
 
 app.get('/', (req, res) => {
     res.send("server is running")
