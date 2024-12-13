@@ -67,30 +67,22 @@ app.post('/allocate', (req, res) => {
       fragmentations.push([...remainingBlocks]); 
     });
   } else if (allocationType === 'next-fit') {
-    let lastAllocatedIndex = 0; // Lưu vị trí của khối bộ nhớ được cấp phát lần cuối
-    processSizes.forEach((process, i) => {
-      let allocated = false;
+    let lastAllocatedIndex = 0; // Lưu vị trí khối bộ nhớ được cấp phát lần cuối
+
+processSizes.forEach((process, i) => {
+      let allocated = false; // Cờ đánh dấu xem tiến trình đã được cấp phát hay chưa
+
+      // Duyệt từ vị trí lưu trữ lần cuối đến cuối danh sách
       for (let j = lastAllocatedIndex; j < remainingBlocks.length; j++) {
         if (remainingBlocks[j] >= process) {
-          allocations[i] = j;
-          remainingBlocks[j] -= process;
-          lastAllocatedIndex = j + 1;//lưu lại vị trí vừa được cấp phát để tiến trình sau tiếp tục được cấp phát từ vị trí này
-          allocated = true;
+          allocations[i] = j; // Cấp phát khối bộ nhớ
+          remainingBlocks[j] -= process; // Trừ đi dung lượng khối được cấp phát
+          lastAllocatedIndex = j + 1; // Cập nhật vị trí cấp phát cuối cùng
+          allocated = true; // Đánh dấu là đã cấp phát
           break;
         }
       }
-      // Nếu không tìm thấy từ vị trí cuối cùng, tìm tiếp từ đầu mảng
-      if (!allocated) {
-        for (let j = 0; j <= lastAllocatedIndex; j++) {
-          if (remainingBlocks[j] >= process) {
-            allocations[i] = j;
-            remainingBlocks[j] -= process;
-            lastAllocatedIndex = j + 1;
-            allocated = true;
-            break;
-          }
-        }
-      }
+      // Ghi lại tình trạng phân mảnh hiện tại
       fragmentations.push([...remainingBlocks]);
     });
   } else if (allocationType === 'last-fit') {
@@ -106,7 +98,7 @@ app.post('/allocate', (req, res) => {
     });
   }
 
-  res.json({ allocations, fragmentations, remainingBlocks });
+  res.json({ allocations, fragmentations });
 });
 
 
