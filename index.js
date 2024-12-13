@@ -106,7 +106,7 @@ app.post('/allocate', (req, res) => {
     });
   }
 
-  res.json({ allocations, fragmentations, remainingBlocks });
+  res.json({ allocations, fragmentations });
 });
 
 
